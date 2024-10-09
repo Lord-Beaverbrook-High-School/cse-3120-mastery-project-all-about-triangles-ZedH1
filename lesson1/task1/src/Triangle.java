@@ -25,6 +25,9 @@ public class Triangle {
    * Postcondition:
    *  - Constructs triangle with given parameters
    * - Smallest = double s, Medium = double m, Largest  = double l
+   *  - uses for-each loop and uses if checks to figure out order
+   *  - for each is the java equivalent for (for i in [table]) in python
+   *  - if same value is seen in an already declared variable, set it to medium
    *  - Print out that a new triangle has been constructucted
    * param double s the smallest double, double m the medium double, double l the largest double
    * return triangle object
@@ -32,30 +35,23 @@ public class Triangle {
   public Triangle(double s, double m, double l)
   {
     double[] set = {s, m, l};
-    for (int f = 0; f < set.length; f++)
-    {
-      if (set[f] >= s && set[f] >= m && set[f] >= l)
-      {
-        if (lSide == set[f])
-        {
-          mSide = set[f];
-          continue;
-        }
-        lSide = set[f];
+      for (double v : set) {
+          if (v >= s && v >= m && v >= l) {
+              if (lSide == v) {
+                  mSide = v;
+                  continue;
+              }
+              lSide = v;
+          } else if (v <= s && v <= m && v <= l) {
+              if (sSide == v) {
+                  mSide = v;
+                  continue;
+              }
+              sSide = v;
+          } else {
+              mSide = v;
+          }
       }
-
-      else if (set[f] <= s && set[f] <= m && set[f] <= l)
-      {
-        if (sSide == set[f])
-        {
-          mSide = set[f];
-          continue;
-        }
-        sSide = set[f];
-      } else {
-        mSide = set[f];
-      }
-    }
 
     System.out.println("A new triangle is created");
   }
